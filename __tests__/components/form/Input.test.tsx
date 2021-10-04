@@ -1,22 +1,27 @@
 import {
-  screen, act,
+  render, screen, waitFor,
 } from '@testing-library/react'
+import { useForm } from 'react-hook-form'
 
 import Input from '../../../components/form/Input'
 
 describe('Input', () => {
   it('should render the input', async () => {
-    await act(async () => setupWithTheme(
-      <Input
-        testId="input-first-name"
-        error={false}
-        label="First Name"
-        id="first_name"
-        validations={{ required: true }}
-        formState={{ errors: {} }}
-        register={jest.fn()}
-      />,
-    ))
+    const Component = () => {
+      const { control } = useForm()
+
+      return (
+        <Input
+          testId="input-first-name"
+          control={control}
+          label="First Name"
+          name="first_name"
+          rules={{ required: true }}
+        />
+      )
+    }
+
+    render(<Component />)
 
     const input = await screen.getByTestId('input-first-name')
 
@@ -24,20 +29,40 @@ describe('Input', () => {
   })
 
   it('should render an error ', async () => {
-    await act(async () => setupWithTheme(
-      <Input
-        testId="input-first-name"
-        error
-        label="First Name"
-        id="first_name"
-        validations={{ required: true }}
-        formState={{ errors: { first_name: { type: 'required' } } }}
-        register={jest.fn()}
-      />,
-    ))
+    const WrapperForm = () => {
+      const {
+        control,
+        handleSubmit,
+      } = useForm()
 
-    const input = await screen.getByTestId('input-first-name-error')
+      const onSubmit = jest.fn()
 
-    expect(input).toBeInTheDocument()
+      return (
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <Input
+            control={control}
+            label="First Name"
+            name="first_name"
+            rules={{ required: true }}
+            testId="input-first-name"
+          />
+
+          <button data-testid="submit" type="submit">Submit</button>
+        </form>
+      )
+    }
+
+    await render(
+      <WrapperForm />,
+    )
+
+    await waitFor(() => {
+      const submit = screen.getByTestId('submit')
+      submit.click()
+    })
+
+    const error = screen.getByTestId('input-first-name-error')
+
+    expect(error).toBeInTheDocument()
   })
 })

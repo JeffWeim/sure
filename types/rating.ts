@@ -1,11 +1,11 @@
-export interface IFormInput {
-  first_name: String
-  last_name: String
-  line_1: String
-  line_2: String
-  city: String
-  region: String
-  postal: String
+export type FormValues = {
+  first_name: string
+  last_name: string
+  line_1: string
+  line_2: string
+  city: string
+  region: string
+  postal: string
 }
 
 export type TServerErrors = {

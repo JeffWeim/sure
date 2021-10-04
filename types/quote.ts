@@ -1,7 +1,7 @@
 type VariableOption = {
   title: string,
   description: string,
-  values: Array<Number>,
+  values: Array<number>,
 }
 
 type Address = {

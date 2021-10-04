@@ -23,6 +23,7 @@
     "camelcase": 0,
     "react/jsx-props-no-spreading": 0,
     "react/require-default-props": 0,
+    "no-use-before-define": 0,
     "import/extensions": [
       "error",
       "ignorePackages",

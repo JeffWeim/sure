@@ -110,7 +110,7 @@ const Quote: NextPage = () => {
         variant="h5"
         gutterBottom
         align="center"
-        style={{ marginBottom: '30px' }}
+        sx={{ marginBottom: '30px' }}
       >
         Premium: $
         {quote.premium}
@@ -128,7 +128,7 @@ const Quote: NextPage = () => {
             label="Deductible"
             onChange={(e: ChangeEvent<HTMLInputElement>): void => handleDeductibleChange(e)}
           >
-            {quote.variable_options.deductible.values.map((value: any) => (
+            {quote.variable_options.deductible.values.map((value: number) => (
               <MenuItem key={value} value={value}>
                 {value}
               </MenuItem>
@@ -155,7 +155,7 @@ const Quote: NextPage = () => {
               (e: ChangeEvent<HTMLInputElement>): void => handleAsteroidCollisionCoverageChange(e)
             }
           >
-            {quote.variable_options.asteroid_collision.values.map((value: any) => (
+            {quote.variable_options.asteroid_collision.values.map((value: number) => (
               <MenuItem key={value} value={value}>
                 {value}
               </MenuItem>

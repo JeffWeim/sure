@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import type { NextPage } from 'next'
-import { useForm, SubmitHandler } from 'react-hook-form'
+import { useForm, SubmitHandler, FieldValues } from 'react-hook-form'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 
@@ -14,7 +14,7 @@ import Divider from '../components/Divider'
 import Form from '../components/form/Form'
 import Input from '../components/form/Input'
 
-import { IFormInput, TServerErrors } from '../types/rating'
+import { TServerErrors } from '../types/rating'
 import theme from '../theme'
 
 const Rating: NextPage = () => {
@@ -24,13 +24,11 @@ const Rating: NextPage = () => {
   const router = useRouter()
 
   const {
-    register,
+    control,
     handleSubmit,
-    formState,
-    formState: { errors },
-  } = useForm<IFormInput>()
+  } = useForm<FieldValues>()
 
-  const onSubmit: SubmitHandler<IFormInput> = async (data) => {
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const {
       city, first_name, last_name, line_1, line_2, postal, region,
     } = data
@@ -88,23 +86,19 @@ const Rating: NextPage = () => {
       <Form onSubmit={handleSubmit(onSubmit)}>
         <FormGroup>
           <Input
+            control={control}
+            label="First Name*"
+            name="first_name"
+            rules={{ required: true }}
             testId="input-first-name"
-            error={errors.first_name?.type === 'required'}
-            label="First Name"
-            id="first_name"
-            validations={{ required: true }}
-            formState={formState}
-            register={register}
           />
 
           <Input
+            control={control}
+            label="Last Name*"
+            name="last_name"
+            rules={{ required: true }}
             testId="input-last-name"
-            error={errors.last_name?.type === 'required'}
-            label="Last Name"
-            id="last_name"
-            validations={{ required: true }}
-            formState={formState}
-            register={register}
           />
         </FormGroup>
 
@@ -112,51 +106,43 @@ const Rating: NextPage = () => {
 
         <FormGroup>
           <Input
+            control={control}
+            label="Address 1*"
+            name="line_1"
+            rules={{ required: true }}
             testId="input-address1"
-            error={errors.line_1?.type === 'required'}
-            label="Address 1"
-            id="line_1"
-            validations={{ required: true }}
-            formState={formState}
-            register={register}
           />
 
           <Input
-            testId="input-address2"
+            control={control}
             label="Address 2"
-            id="line_2"
-            formState={formState}
-            register={register}
+            name="line_2"
+            testId="input-address2"
           />
 
           <Input
+            control={control}
+            label="City*"
+            name="city"
+            rules={{ required: true }}
             testId="input-city"
-            error={errors.city?.type === 'required'}
-            label="City"
-            id="city"
-            validations={{ required: true }}
-            formState={formState}
-            register={register}
           />
 
           <Input
+            control={control}
+            label="State*"
+            name="region"
+            rules={{ required: true }}
             testId="input-state"
-            error={errors.region?.type === 'required'}
-            label="State"
-            id="region"
-            validations={{ required: true }}
-            formState={formState}
-            register={register}
           />
 
           <Input
+            control={control}
+            error={serverErrors?.address?.postal === 'invalid_postal_code'}
+            label="Zip*"
+            name="postal"
+            rules={{ required: true }}
             testId="input-zip"
-            error={errors.postal?.type === 'required' || serverErrors?.address?.postal === 'invalid_postal_code'}
-            label="Zip"
-            id="postal"
-            validations={{ required: true }}
-            formState={formState}
-            register={register}
           />
         </FormGroup>
 

@@ -1,6 +1,6 @@
 /// <reference types="cypress"/>
 
-context('Rating Page', () => {
+context('Quote Page', () => {
   before(() => {
     cy.visit('http://localhost:3000/rating')
 

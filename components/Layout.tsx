@@ -14,7 +14,8 @@ import Footer from './Footer'
 import Header from './Header'
 
 const StyledMain = styled.main`
-  min-height: calc(100vh - 152px);
+  min-height: calc(100vh - 175px);
+  padding: 0 20px;
 `
 
 const StyledGrid = styled(Grid)`

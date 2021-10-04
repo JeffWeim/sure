@@ -1,14 +1,7 @@
 import Typography from '@mui/material/Typography'
 import { styled } from '@mui/material/styles'
 
-type DescriptionProps = {
-  margin?: string;
-  children:
-  | JSX.Element
-  | JSX.Element[]
-  | string
-  | string[];
-}
+import { DescriptionProps } from '../types/description'
 
 const StyledTypography = styled(Typography)`
   margin: ${({ margin }) => `${margin}`};

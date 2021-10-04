@@ -1,7 +1,8 @@
-export type LayoutProps = {
+export type FormProps = {
   children:
     | JSX.Element
     | JSX.Element[]
     | string
     | string[]
+  onSubmit?: () => void
 }

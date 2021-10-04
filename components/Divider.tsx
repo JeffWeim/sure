@@ -1,9 +1,7 @@
 import Divider from '@mui/material/Divider'
 import { styled } from '@mui/material/styles'
 
-type DividerProps = {
-  margin?: string
-}
+import { DividerProps } from '../types/divider'
 
 const StyledDivider = styled(Divider)<DividerProps>`
   && {

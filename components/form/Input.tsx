@@ -1,6 +1,8 @@
-import { styled } from '@mui/material/styles'
-
+import React from 'react'
 import TextField from '@mui/material/TextField'
+import { styled } from '@mui/material/styles'
+import { useController } from 'react-hook-form'
+
 import Typography from '@mui/material/Typography'
 
 import { InputProps } from '../../types/input'
@@ -11,28 +13,30 @@ const StyledTextField = styled(TextField)`
 
 const ErrorText = styled(Typography)`
   color: ${({ theme }) => theme.palette.error.main};
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 `
 
 const Input = (props: InputProps) => {
   const {
-    testId, error, label, id, validations, formState, register,
+    testId, error, label,
   } = props
+
+  const { field, fieldState } = useController(props)
 
   return (
     <>
       <StyledTextField
         data-testid={testId}
-        error={error}
+        error={fieldState?.invalid || error}
         label={label}
         variant="outlined"
-        {...register(id, { ...validations })}
+        {...field}
       />
 
-      {formState?.errors[id] && (
+      {fieldState?.error && (
         <ErrorText data-testid={`${testId}-error`}>
           *
-          {formState?.errors[id]?.type}
+          {fieldState?.error?.type}
         </ErrorText>
       )}
     </>

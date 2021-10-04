@@ -1,15 +1,10 @@
-export type InputProps = {
+import { UseControllerProps, Control, FieldValues } from 'react-hook-form'
+import { TextFieldProps } from '@mui/material/TextField'
+
+export type InputProps = UseControllerProps & {
+  inputProps?: TextFieldProps,
   testId: string,
   error?: boolean,
   label: string,
-  id: string,
-  validations?: object,
-  formState: {
-    errors: {
-      [id: string]: {
-        type: string
-      }
-    }
-  },
-  register: (id: string, validations: object) => void // eslint-disable-line
+  control: Control<FieldValues>;
 }

@@ -1,5 +1,7 @@
 import styled from 'styled-components'
 
+import { FormProps } from '../../types/form'
+
 const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
@@ -8,7 +10,7 @@ const StyledForm = styled.form`
   margin-bottom: 50px;
 `
 
-const FormForm = (props) => {
+const Form = (props: FormProps) => {
   const { children, onSubmit } = props
 
   return (
@@ -18,4 +20,4 @@ const FormForm = (props) => {
   )
 }
 
-export default FormForm
+export default Form
