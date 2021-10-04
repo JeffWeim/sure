@@ -1,0 +1,49 @@
+{
+  "extends": [
+    "prettier",
+    "airbnb",
+    "plugin:react/recommended",
+    "next",
+    "plugin:@next/next/recommended",
+    "next/core-web-vitals"
+  ],
+  "plugins": [
+    "cypress",
+    "jest"
+  ],
+  "globals": {
+    "JSX": true,
+    "jest": true,
+    "setupWithTheme": true
+  },
+  "env": {
+    "cypress/globals": true
+  },
+  "rules": {
+    "camelcase": 0,
+    "react/jsx-props-no-spreading": 0,
+    "react/require-default-props": 0,
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+    ],
+    "semi": ["error", "never"],
+    "jsx-a11y/anchor-is-valid": 0,
+    "react/jsx-filename-extension": [0, { "extensions": [".js", ".jsx"] }],
+    "import/order": [
+      "error",
+      {
+        "groups": [["external", "builtin"], ["internal", "index", "parent"], ["sibling"]],
+        "newlines-between": "always-and-inside-groups"
+      }
+    ],
+    "import/no-extraneous-dependencies": ["error", {"devDependencies": ["setupTests.tsx", "next.config.js", "**/*.spec.{js|ts|tsx}", "./__tests__/**/*.test.tsx"]}],
+    "no-unused-vars": ["error", { "varsIgnorePattern": "setupWithTheme" }]
+  }
+}
